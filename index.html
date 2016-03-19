@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+Hello!
+  <title></title>
+</head>
+<body>
+
+<script>
+// var ctx = new AudioContext();
+// var osc = ctx.createOscillator();
+// var gain = ctx.createGain();
+
+// osc.connect(gain);
+// gain.connect(ctx.destination);
+// //osc.start(9);
+
+// osc.type = 'sine';
+// osc.frequency.value = 440;
+
+// osc.start(ctx.currentTime);
+// osc.stop(ctx.currentTime + 1); 
+
+var ctx = new AudioContext();
+var gain = ctx.createGain();
+
+function playNote(start,stop,frequency){
+  var osc = ctx.createOscillator();
+     var modulator = ctx.createOscillator();
+  
+  osc.connect(gain);
+     modulator.connect(gain.gain);
+
+  gain.connect(ctx.destination);
+  osc.type = 'sine';
+  osc.frequency.value = frequency;
+  osc.start(start);
+  osc.stop(stop);
+     modulator.start(start);
+     modulator.stop(stop);
+}
+
+var c4 = 261.63
+var e4 = 329.63
+var g4 = 392
+var a4 = 440
+
+// playNote(ctx.currentTime,ctx.currentTime+1, c4)
+// playNote(ctx.currentTime,ctx.currentTime+1, e4)
+playNote(ctx.currentTime,ctx.currentTime+1, a4)
+
+
+</script>
+</body>
+</html>
